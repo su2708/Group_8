@@ -72,7 +72,7 @@ Netflix의 영화 리뷰 데이터를 사용하여, 리뷰의 평점을 예측�
         
         아래와 같은 형태의 그래프가 보여져야 합니다.
         
-        ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9545aed8-ce48-4590-84cf-75d5ec696edf/image.png)
+        [distribution]("challenge\images\distribution.png")
         
 4. **리뷰 예측 모델 학습시키기 (LSTM)**
     
@@ -217,3 +217,20 @@ Netflix의 영화 리뷰 데이터를 사용하여, 리뷰의 평점을 예측�
     
     - **워드 클라우드란?**  문서의 키워드, 개념 등을 직관적으로 파악할 수 있도록 핵심 단어를 시각화하는 기법. 예를 들면 많이 언급될수록 단어를 크게 표현해 한눈에 들어올 수 있게 하는 기법 등이 있습니다.
     - **(필수) 참고**
+    ```python
+    from wordcloud import WordCloud, STOPWORDS
+
+    # (선택) 불용어를 먼저 제거해주세요.
+    stopwords = set(STOPWORDS)
+    stopwords.update(['netflix', 'movie', 'show', 'time', 'app', 'series', 'phone'])  # 리뷰에서 필요없는 단어는 여기 안에 추가하셔도 좋습니다.
+
+    # 부정적인 리뷰만 먼저 모아본 다음, 아래처럼 wordcloud를 그려보세요
+    wordcloud = WordCloud(width=800, height=400, background_color='white', stopwords=stopwords).generate(negative_reviews)
+
+    plt.figure(figsize=(12,6))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.title('Negative Reviews Word Cloud')
+    plt.show()
+    ```
+    [wordcloud]("challenge\images\wordcloud.png")
