@@ -3,4 +3,6 @@
 ```git
 # blabla
 git add .
+
+first comment from leader
 ```
